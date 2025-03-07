@@ -43,18 +43,9 @@ for data protection specialists and lawyers scrutinizing chatmail operations.
 
 ## 1. Name and contact information 
 
-Responsible for the processing of your personal data is:
-```
-{{ config.privacy_postal }}
-```
+Responsible for the processing of your personal data is: `Cross N.`
 
-E-mail: {{ config.privacy_mail }}
-
-We have appointed a data protection officer:
-
-```
-{{ config.privacy_pdo }}
-```
+E-mail: `cross@dill.moe`
 
 ## 2. Processing when using chat e-mail services
 
