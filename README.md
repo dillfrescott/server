@@ -1,21 +1,55 @@
 
 <img width="800px" src="www/src/collage-top.png"/>
 
-# Chatmail services optimized for Delta Chat apps 
+# Chatmail servers for secure instant messaging 
 
-This repository helps to setup a ready-to-use chatmail server
+Chatmail servers are minimal interoperable e-mail routing machines designed for:
+
+- **Convenience:** Instant onboarding, with optional Google/Apple/Huawei push notifications
+
+- **Privacy:** Just login, no questions asked, no name, numbers or e-mail needed
+
+- **Speed:** End-to-End Message delivery in well under a second
+
+- **Security:** Strict TLS, DKIM and OpenPGP with metadata-minimization enforced. 
+
+- **Relaxation:** No annoying spam-checking, IP reputation or rate limits
+
+- **Efficiency:** messages are only stored for transit and removed automatically. 
+
+This repository contains everything needed to setup a ready-to-use chatmail server
 comprised of a minimal setup of the battle-tested 
 [postfix smtp](https://www.postfix.org) and [dovecot imap](https://www.dovecot.org) services. 
 
-The setup is designed and optimized for providing chatmail accounts 
-for use by [Delta Chat apps](https://delta.chat).
+The automated setup is designed and optimized for providing chatmail addresses 
+for immediate permission-free onboarding through chat apps and bots. 
+Chatmail addresses are automatically created by a first login, 
+after which the initially specified password is required 
+for sending and receiving messages through them. 
 
-Chatmail accounts are automatically created by a first login, 
-after which the initially specified password is required for using them. 
+Please see [this list of known apps and client projects](https://support.delta.chat/t/list-of-all-known-client-projects/3059) which offer instant onboarding on chatmail servers,
+and [this list of known public 3rd party chatmail servers](https://delta.chat/en/chatmail). 
 
-## Deploying your own chatmail server 
 
-To deploy chatmail on your own server, you must have set-up ssh authentication and need to use an ed25519 key, due to an [upstream bug in paramiko](https://github.com/paramiko/paramiko/issues/2191). You also need to add your private key to the local ssh-agent, because you can't type in your password during deployment.
+## Minimal requirements, Prerequisites 
+
+You will need the following: 
+
+- control over a domain through a DNS provider of your choice, 
+
+- a remote Debian 12 machine with IPV4 and preferably also IPV6 addresses and
+  reachable SMTP/SUBMISSIONS/IMAPS/HTTPS ports. 
+  Machine needs 1GB RAM, one slow CPU and maybe 10GB storage for a
+  few thousand active chatmail addresses,
+
+- a terminal window with password-less ssh root login to the remote machine;
+  you must have set up ssh authentication and need to use an ed25519 key, 
+  due to an [upstream bug in paramiko](https://github.com/paramiko/paramiko/issues/2191);
+  you also need to add your private key to the local ssh-agent, 
+  because you can't type in your password during deployment.
+
+
+## Getting started 
 
 We use `chat.example.org` as the chatmail domain in the following steps. 
 Please substitute it with your own domain. 
@@ -228,8 +262,8 @@ While this file is present, account creation will be blocked.
 Port 443 multiplexes HTTPS, IMAP and SMTP using ALPN to redirect connections to ports 8443, 465 or 993.
 [acmetool](https://hlandau.github.io/acmetool/) listens on port 80 (http).
 
-Delta Chat apps will, however, discover all ports and configurations
-automatically by reading the [autoconfig XML file](https://www.ietf.org/archive/id/draft-bucksch-autoconfig-00.html) from the chatmail service.
+Chatmail-core based apps will, however, discover all ports and configurations
+automatically by reading the [autoconfig XML file](https://www.ietf.org/archive/id/draft-bucksch-autoconfig-00.html) from the chatmail server.
 
 ## Email authentication
 
@@ -316,9 +350,9 @@ to make sure you can connect with SSH.
 5. Now, point DNS to the new IP addresses.
 
    You can already remove the old IP addresses from DNS.
-   Existing Delta Chat users will still be able to connect
+   Existing Chatmail app users or bots will still be able to connect
    to the old server, send and receive messages,
-   but new users will fail to create new profiles
+   but new ones will fail to create new profiles
    with your chatmail server.
 
    If other servers try to deliver messages to your new server they will fail,
