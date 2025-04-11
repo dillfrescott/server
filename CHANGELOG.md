@@ -2,6 +2,16 @@
 
 ## untagged
 
+- Handle Port-25 connect errors more gracefully (common with VPNs)
+  ([#552](https://github.com/chatmail/relay/pull/552))
+
+- Avoid "acmetool not found" during initial run
+  ([#550](https://github.com/chatmail/relay/pull/550))
+
+- Fix timezone handling such that client/servers do not need to use
+  same timezone. 
+  ([#553](https://github.com/chatmail/relay/pull/553))
+
 - Enforce end-to-end encryption for incoming messages. 
   New user address mailboxes now get a `enforceE2EEincoming` file 
   which prohibits incoming cleartext messages from other domains. 
@@ -14,12 +24,21 @@
 - Enforce end-to-end encryption between local addresses 
   ([#535](https://github.com/chatmail/server/pull/535))
 
+- unbound: check that port 53 is not occupied by a different process
+  ([#537](https://github.com/chatmail/server/pull/537))
+
+- unbound: before unbound is there, use 9.9.9.9 for resolving
+  ([#518](https://github.com/chatmail/relay/pull/518))
+
 - Limit the bind for the HTTPS server on 8443 to 127.0.0.1 
   ([#522](https://github.com/chatmail/server/pull/522))
   ([#532](https://github.com/chatmail/server/pull/532))
 
 - Send SNI when connecting to outside servers
   ([#524](https://github.com/chatmail/server/pull/524))
+
+- postfix master.cf: use 127.0.0.1 for consistency
+  ([#544](https://github.com/chatmail/relay/pull/544))
 
 - Pass through `original_content` instead of `content` in filtermail
   ([#509](https://github.com/chatmail/server/pull/509))
